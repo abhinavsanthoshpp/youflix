@@ -52,7 +52,7 @@ To configure your payment handles:
      upiId: 'abhinava6525@naviaxis',              // Your UPI ID (GPay, PhonePe, Paytm, BHIM, Navi)
      buyMeACoffeeUsername: 'abhinavsanthoshpp',  // buymeacoffee.com/abhinavsanthoshpp
      kofiUsername: 'your_username',               // ko-fi.com/your_username
-     githubUsername: 'your_username'              // github.com/sponsors/your_username
+     githubUsername: 'abhinavsanthoshpp'          // github.com/sponsors/abhinavsanthoshpp
    };
    ```
 3. Replace the placeholder values with your accounts.
