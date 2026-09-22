@@ -484,6 +484,157 @@
       color: var(--text-white);
     }
 
+    /* Help & Feedback Section */
+    .feedback-section {
+      padding: 90px 5%;
+      background: #111111;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .feedback-container {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .feedback-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feedback-form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 28px;
+    }
+
+    .feedback-form-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .feedback-form-card p {
+      font-size: 13px;
+      color: var(--text-gray);
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ccc;
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      background: #222222;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--netflix-red);
+      box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.25);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--netflix-red);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-submit:hover {
+      background: var(--netflix-red-hover);
+      transform: translateY(-1px);
+    }
+
+    .support-channels-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .channel-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .channel-box:hover {
+      border-color: rgba(229, 9, 20, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .channel-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .channel-desc {
+      font-size: 13px;
+      color: var(--text-gray);
+      line-height: 1.4;
+    }
+
+    .channel-action {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--netflix-red);
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
     @media (max-width: 600px) {
       .hero { padding: 60px 5% 50px; }
       .billboard-mock { height: auto; padding: 20px; }
@@ -501,6 +652,7 @@
     <div class="nav-links">
       <a href="#features" class="nav-link">Features</a>
       <a href="#install" class="nav-link">Install</a>
+      <a href="#feedback" class="nav-link">Help & Feedback</a>
       <a href="donate.html" class="nav-link" style="color:#ff5e66;">☕ Donate</a>
       <a href="youflix-extension.zip" download class="btn-cta">
         <span>Download .ZIP</span>
@@ -666,15 +818,110 @@
     </div>
   </section>
 
+  <!-- Help & Feedback Section -->
+  <section class="feedback-section" id="feedback">
+    <div class="feedback-container">
+      <div class="section-header">
+        <h2>Help & Support • Feature Requests • Bug Reports</h2>
+        <p>Found an issue or have an idea to make YouFlix better? Send your suggestions directly to the developer.</p>
+      </div>
+
+      <div class="feedback-grid">
+        <!-- Interactive Form -->
+        <div class="feedback-form-card">
+          <h3>Send Direct Message</h3>
+          <p>Choose a category and write your message below:</p>
+
+          <form id="support-form" onsubmit="handleSupportSubmit(event)">
+            <div class="form-group">
+              <label for="feedback-type">Category</label>
+              <select id="feedback-type" class="form-control" required>
+                <option value="💡 Feature Request">💡 Feature Request</option>
+                <option value="🐛 Bug Report">🐛 Bug Report</option>
+                <option value="❓ Question / Help">❓ Question / Help</option>
+                <option value="💬 General Feedback">💬 General Feedback</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="feedback-subject">Subject</label>
+              <input type="text" id="feedback-subject" class="form-control" placeholder="Short summary (e.g. Add keyboard shortcut for cinema mode)" required>
+            </div>
+
+            <div class="form-group">
+              <label for="feedback-message">Details</label>
+              <textarea id="feedback-message" class="form-control" placeholder="Describe the feature or what happened when you found the bug..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              <span>Send Message</span>
+              <span>→</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Quick Channel Cards -->
+        <div class="support-channels-card">
+          <a href="https://github.com/abhinavsanthoshpp/youflix/issues/new" target="_blank" rel="noopener" class="channel-box">
+            <div class="channel-header">
+              <span>🐙</span>
+              <span>GitHub Issues</span>
+            </div>
+            <div class="channel-desc">
+              Track bugs publicly, vote on planned features, or inspect ongoing discussions with the developer.
+            </div>
+            <div class="channel-action">Open GitHub Issue →</div>
+          </a>
+
+          <a href="mailto:abhinavsanthoshpp@gmail.com?subject=YouFlix%20Support" class="channel-box">
+            <div class="channel-header">
+              <span>✉️</span>
+              <span>Direct Email Support</span>
+            </div>
+            <div class="channel-desc">
+              Email abhinavsanthoshpp@gmail.com for priority help, questions, or private feedback.
+            </div>
+            <div class="channel-action">Send Email →</div>
+          </a>
+
+          <a href="https://buymeacoffee.com/abhinavsanthoshpp" target="_blank" rel="noopener" class="channel-box">
+            <div class="channel-header">
+              <span>☕</span>
+              <span>Buy Me a Coffee</span>
+            </div>
+            <div class="channel-desc">
+              Leave a message with your donation to help prioritize your requested features.
+            </div>
+            <div class="channel-action">Visit Page →</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
     <div>
       YouFlix is an independent open-source project. Not affiliated with YouTube, LLC or Netflix, Inc.
     </div>
     <div>
-      Created by <a href="https://buymeacoffee.com/abhinavsanthoshpp" target="_blank" rel="noopener">Abhinav</a> • <a href="donate.html">Support</a> • <a href="https://github.com/abhinavsanthoshpp" target="_blank" rel="noopener">GitHub</a>
+      Created by <a href="https://buymeacoffee.com/abhinavsanthoshpp" target="_blank" rel="noopener">Abhinav</a> • <a href="#feedback">Help & Support</a> • <a href="donate.html">Donate</a> • <a href="https://github.com/abhinavsanthoshpp" target="_blank" rel="noopener">GitHub</a>
     </div>
   </footer>
+
+  <script>
+    function handleSupportSubmit(e) {
+      e.preventDefault();
+      const type = document.getElementById('feedback-type').value;
+      const subject = document.getElementById('feedback-subject').value;
+      const message = document.getElementById('feedback-message').value;
+
+      const fullSubject = encodeURIComponent(`[YouFlix] ${type}: ${subject}`);
+      const body = encodeURIComponent(`Category: ${type}\nSubject: ${subject}\n\nDetails:\n${message}\n\n---\nSent via YouFlix Web Portal`);
+
+      window.location.href = `mailto:abhinavsanthoshpp@gmail.com?subject=${fullSubject}&body=${body}`;
+    }
+  </script>
 
 </body>
 </html>
