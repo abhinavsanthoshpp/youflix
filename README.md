@@ -1,82 +1,78 @@
 # YouFlix
 
-A clean browser extension that gives YouTube a Netflix-inspired interface with category rows, a featured hero billboard, quick hover previews, and an authentic watch experience.
+YouFlix is a Manifest V3 browser extension that transforms YouTube into a cinematic, Netflix-inspired browsing and watching experience.
 
-## Overview
+**Live page:** https://abhinavsanthoshpp.github.io/youflix/
 
-YouFlix rebuilds YouTube's browse and watch experience:
-- **Hero Billboard**: Featured spotlight video with title, description, play button, and trailer preview.
-- **Horizontal Rows**: Content organized into browsable rows (Trending, Subscriptions, Library, etc.) with pagination arrows.
-- **Card Hover Preview**: Hovering a card enlarges the thumbnail and shows quick actions (play, save to list, like).
-- **Detail Modal**: View video synopsis, creator info, and recommendations without leaving the feed.
-- **Watch Experience**: Theater-width player, auto-hiding controls and cursor on inactivity, "Skip Intro" shortcut, and custom red scrubber bar.
-- **Intro Sound**: Plays the familiar intro chime on first load (toggleable).
-- **Mode Switcher**: Quick toggle between YouFlix and standard YouTube via the header button or popup.
+## Why YouFlix
 
-## Installation (Local / Developer Mode)
+YouFlix is designed for users who want a cleaner, more immersive YouTube interface with structured discovery and a polished watch layout.
 
-Works on any Chromium browser (Chrome, Brave, Edge, Opera) and Firefox.
+## Core Features
 
-1. Open your browser's extension page:
+- **Hero Billboard** for featured content with title, context, and quick actions
+- **Horizontal Content Rows** for category-style browsing
+- **Interactive Hover Previews** with quick visual context
+- **Enhanced Watch Experience** with theater-style presentation
+- **Intro Sound Experience** (toggleable)
+- **Fast Mode Switcher** between YouFlix mode and default YouTube
+- **Privacy-First Design** with local preferences and no telemetry
+
+## Compatibility
+
+- Chromium browsers: Chrome, Brave, Edge, Opera, Vivaldi
+- Firefox (via `browser_specific_settings` in manifest)
+
+## Installation (Developer Mode)
+
+1. Download or clone this repository.
+2. Open your browser extensions page:
    - Chrome: `chrome://extensions/`
    - Edge: `edge://extensions/`
    - Brave: `brave://extensions/`
-2. Enable **Developer mode** (toggle in top-right).
-3. Click **Load unpacked** and select this directory.
-4. Navigate to [youtube.com](https://www.youtube.com).
+3. Enable **Developer mode**.
+4. Click **Load unpacked** and select the repository folder.
+5. Open [youtube.com](https://www.youtube.com).
 
-## Project Structure
+## Project Layout
 
+```text
+manifest.json   # Extension manifest (MV3)
+content.js      # Main content script and UI behavior
+styles.css      # YouFlix mode styling
+popup.html      # Extension popup markup
+popup.js        # Popup logic and settings actions
+popup.css       # Popup styling
+donate.html     # Standalone donation/support page
+build.sh        # Packaging and validation script
+assets/         # Icons, audio, and promo assets
 ```
-├── manifest.json         # Manifest V3 extension config
-├── content.js            # Main content script (DOM parser, UI injection)
-├── styles.css            # Stylesheet for Netflix layout, rows & watch player
-├── popup.html            # Extension popup markup
-├── popup.js              # Settings controller & audio test
-├── popup.css             # Popup styles
-├── donate.html           # Standalone donation page (UPI direct bank, Buy Me a Coffee, Ko-fi)
-├── build.sh              # Bash script to package extension into zip
-├── youflix-extension.zip # Built extension ready for store upload
-└── assets/               # Extension icons and intro audio
-```
 
-## Donation & Support Setup
+## Build Package
 
-YouFlix includes a built-in donation page (`donate.html`) and quick donation buttons in the extension popup and header.
-
-To configure your payment handles:
-1. Open `donate.html`.
-2. Locate the `DONATION_CONFIG` block:
-   ```javascript
-   const DONATION_CONFIG = {
-     upiId: 'abhinava6525@naviaxis',              // Your UPI ID (GPay, PhonePe, Paytm, BHIM, Navi)
-     buyMeACoffeeUsername: 'abhinavsanthoshpp',  // buymeacoffee.com/abhinavsanthoshpp
-     kofiUsername: 'your_username',               // ko-fi.com/your_username
-     githubUsername: 'abhinavsanthoshpp'          // github.com/sponsors/abhinavsanthoshpp
-   };
-   ```
-3. Replace the placeholder values with your accounts.
-4. Rebuild the extension package by running `./build.sh`.
-
-You can also host `donate.html` directly on GitHub Pages, Vercel, or Netlify to share as a standalone donation link.
-
-## Building for the Store
-
-To create a clean ZIP package for the Chrome Web Store or Firefox Add-ons:
+To generate the distributable extension package:
 
 ```bash
 chmod +x build.sh
 ./build.sh
 ```
 
-This validates `manifest.json`, checks all required files, and outputs `youflix-extension.zip`.
+The build script validates the manifest, checks required files, and generates `youflix-extension.zip`.
+
+## Support & Donations
+
+You can support development through the built-in donation page:
+
+- Open `donate.html` for direct support options
+- Use the support links in the popup and landing page
+- Submit bug reports or feature requests via GitHub Issues
 
 ## Privacy
 
-- No third-party network requests or telemetry.
-- Preferences are saved locally via `chrome.storage.sync`.
-- Only runs on `*://*.youtube.com/*`.
+- No third-party analytics or tracking
+- Preferences stored locally using browser extension storage
+- Runs only on `*://*.youtube.com/*`
 
 ## License
 
-MIT License. Feel free to fork, modify, and distribute.
+Released under the **MIT License**.
