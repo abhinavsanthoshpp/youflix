@@ -4,7 +4,13 @@
   "short_name": "YouFlix",
   "version": "1.0.0",
   "description": "Transforms YouTube into a sleek Netflix-style streaming experience with billboard trailers, category rows, and cinema mode.",
-  "homepage_url": "https://github.com",
+  "homepage_url": "https://abhinavsanthoshpp.github.io/youflix/",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "youflix@abhinavsanthoshpp.github.io",
+      "strict_min_version": "109.0"
+    }
+  },
   "permissions": [
     "storage"
   ],
