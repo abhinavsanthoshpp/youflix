@@ -635,9 +635,168 @@
       gap: 4px;
     }
 
+    /* Interactive Demo Controls */
+    .demo-controls {
+      margin-top: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .demo-controls p {
+      font-size: 12px;
+      color: #bbb;
+      margin-bottom: 10px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    .demo-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .demo-pill {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: #232323;
+      color: #ddd;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .demo-pill:hover,
+    .demo-pill.active {
+      background: var(--netflix-red);
+      border-color: var(--netflix-red);
+      color: #fff;
+    }
+
+    /* Live Stats */
+    .live-stats {
+      padding: 40px 5% 90px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .stat-number {
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--netflix-red);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      color: #d0d0d0;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .stat-note {
+      color: #8c8c8c;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    /* FAQ */
+    .faq-section {
+      padding: 90px 5%;
+      border-top: 1px solid var(--border-color);
+      background: #101010;
+    }
+
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-list {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background: #191919;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .faq-question span:last-child {
+      color: var(--netflix-red);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .faq-answer {
+      padding: 0 18px;
+      max-height: 0;
+      overflow: hidden;
+      color: #c2c2c2;
+      font-size: 14px;
+      line-height: 1.5;
+      transition: max-height 0.2s ease, padding 0.2s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 180px;
+      padding: 0 18px 16px;
+    }
+
+    .faq-item.open .faq-question span:last-child {
+      transform: rotate(45deg);
+    }
+
     @media (max-width: 600px) {
       .hero { padding: 60px 5% 50px; }
       .billboard-mock { height: auto; padding: 20px; }
+      .nav-links {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .btn-cta,
+      .btn-secondary {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -651,7 +810,9 @@
     </a>
     <div class="nav-links">
       <a href="#features" class="nav-link">Features</a>
+      <a href="#stats" class="nav-link">Stats</a>
       <a href="#install" class="nav-link">Install</a>
+      <a href="#faq" class="nav-link">FAQ</a>
       <a href="#feedback" class="nav-link">Help & Feedback</a>
       <a href="donate.html" class="nav-link" style="color:#ff5e66;">☕ Donate</a>
       <a href="youflix-extension.zip" download class="btn-cta">
@@ -690,9 +851,9 @@
       <div class="preview-body">
         <div class="billboard-mock">
           <div class="billboard-content">
-            <div class="billboard-tag">★ SPOTLIGHT PREMIERE</div>
-            <h2 class="billboard-title">Inception: The Art of Direction</h2>
-            <p class="billboard-desc">Deep dive into Christopher Nolan's cinematic storytelling, sound design, and mind-bending narrative pacing.</p>
+            <div class="billboard-tag" id="demo-tag">★ SPOTLIGHT PREMIERE</div>
+            <h2 class="billboard-title" id="demo-title">Inception: The Art of Direction</h2>
+            <p class="billboard-desc" id="demo-desc">Deep dive into Christopher Nolan's cinematic storytelling, sound design, and mind-bending narrative pacing.</p>
             <div style="display:flex; gap:10px;">
               <span class="btn-cta" style="padding:7px 16px; font-size:12px; cursor:pointer;">▶ Play Now</span>
               <span class="btn-secondary" style="padding:7px 16px; font-size:12px; cursor:pointer;">ⓘ More Info</span>
@@ -701,12 +862,21 @@
         </div>
 
         <div class="mock-row">
-          <div class="mock-row-title">Trending in Entertainment</div>
-          <div class="mock-cards">
+          <div class="mock-row-title" id="demo-row-title">Trending in Entertainment</div>
+          <div class="mock-cards" id="demo-cards">
             <div class="mock-card"><span class="mock-card-label">Interstellar OST</span></div>
             <div class="mock-card"><span class="mock-card-label">Cyberpunk 2077</span></div>
             <div class="mock-card"><span class="mock-card-label">Oppenheimer Breakdown</span></div>
             <div class="mock-card"><span class="mock-card-label">Blade Runner 2049</span></div>
+          </div>
+        </div>
+
+        <div class="demo-controls">
+          <p>Try the interactive preview:</p>
+          <div class="demo-pills" id="demo-pills">
+            <button type="button" class="demo-pill active" data-demo="cinema">Cinema Mode</button>
+            <button type="button" class="demo-pill" data-demo="gaming">Gaming Lounge</button>
+            <button type="button" class="demo-pill" data-demo="education">Learning Hub</button>
           </div>
         </div>
       </div>
@@ -755,6 +925,35 @@
         <span class="feature-icon">🔒</span>
         <h3>100% Private & Client-Side</h3>
         <p>No remote servers, no data harvesting, no analytics tracking. Manifest V3 compliant security.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="live-stats" id="stats">
+    <div class="section-header">
+      <h2>Project at a Glance</h2>
+      <p>Live counters that summarize what YouFlix delivers to users.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" data-target="6">0</div>
+        <div class="stat-label">Core UX modules</div>
+        <div class="stat-note">Hero, rows, hover actions, watch mode, intro audio, mode switch.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="5">0</div>
+        <div class="stat-label">Supported Chromium browsers</div>
+        <div class="stat-note">Chrome, Brave, Edge, Opera, and Vivaldi are supported.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="100">0</div>
+        <div class="stat-label">Percent client-side</div>
+        <div class="stat-note">No analytics trackers or external data collection.</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="60">0</div>
+        <div class="stat-label">Second setup target</div>
+        <div class="stat-note">Install and switch to YouFlix mode in around one minute.</div>
       </div>
     </div>
   </section>
@@ -899,6 +1098,38 @@
     </div>
   </section>
 
+  <section class="faq-section" id="faq">
+    <div class="faq-container">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Everything you need before installing or contributing.</p>
+      </div>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item open">
+          <button type="button" class="faq-question">
+            <span>Does YouFlix collect any personal data?</span>
+            <span>+</span>
+          </button>
+          <div class="faq-answer">No. YouFlix runs locally in your browser, does not ship analytics, and does not send usage data to third-party servers.</div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-question">
+            <span>Can I switch back to normal YouTube anytime?</span>
+            <span>+</span>
+          </button>
+          <div class="faq-answer">Yes. Use the YouFlix mode switcher in the header or popup to instantly return to the default YouTube interface.</div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-question">
+            <span>Where should I report bugs or request features?</span>
+            <span>+</span>
+          </button>
+          <div class="faq-answer">Use the Help & Feedback section below, open a GitHub issue, or send a direct email through the support card links.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
     <div>
@@ -910,6 +1141,101 @@
   </footer>
 
   <script>
+    const DEMO_VARIANTS = {
+      cinema: {
+        tag: '★ SPOTLIGHT PREMIERE',
+        title: 'Inception: The Art of Direction',
+        desc: "Deep dive into Christopher Nolan's cinematic storytelling, sound design, and mind-bending narrative pacing.",
+        rowTitle: 'Trending in Entertainment',
+        cards: ['Interstellar OST', 'Cyberpunk 2077', 'Oppenheimer Breakdown', 'Blade Runner 2049']
+      },
+      gaming: {
+        tag: '🎮 LIVE SERIES',
+        title: 'Open-World Games Documentary',
+        desc: 'Explore open-world design, speedrun culture, and creator reactions with premium cinematic layout.',
+        rowTitle: 'Gaming Highlights',
+        cards: ['GTA VI Theory', 'Elden Ring Lore', 'Valorant Masterclass', 'Minecraft Cinematics']
+      },
+      education: {
+        tag: '📚 LEARNING SPOTLIGHT',
+        title: 'AI & Web Engineering Mastery',
+        desc: 'Learn practical AI tools, frontend architecture, and product workflows in an immersive, focused feed.',
+        rowTitle: 'Learning Essentials',
+        cards: ['System Design 101', 'LLM Prompting', 'CSS Architecture', 'JavaScript Deep Dive']
+      }
+    };
+
+    function updateDemo(variantKey) {
+      const variant = DEMO_VARIANTS[variantKey];
+      if (!variant) return;
+
+      document.getElementById('demo-tag').textContent = variant.tag;
+      document.getElementById('demo-title').textContent = variant.title;
+      document.getElementById('demo-desc').textContent = variant.desc;
+      document.getElementById('demo-row-title').textContent = variant.rowTitle;
+
+      const cardsRoot = document.getElementById('demo-cards');
+      cardsRoot.innerHTML = variant.cards
+        .map((card) => `<div class="mock-card"><span class="mock-card-label">${card}</span></div>`)
+        .join('');
+    }
+
+    function initDemoControls() {
+      const pills = document.querySelectorAll('.demo-pill');
+      pills.forEach((pill) => {
+        pill.addEventListener('click', () => {
+          pills.forEach((btn) => btn.classList.remove('active'));
+          pill.classList.add('active');
+          updateDemo(pill.dataset.demo);
+        });
+      });
+    }
+
+    function animateStats() {
+      const statNumbers = document.querySelectorAll('.stat-number');
+      statNumbers.forEach((node) => {
+        const target = Number(node.dataset.target || 0);
+        let current = 0;
+        const step = Math.max(1, Math.ceil(target / 40));
+        const timer = setInterval(() => {
+          current += step;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          node.textContent = `${current}${target === 100 ? '%' : ''}`;
+        }, 25);
+      });
+    }
+
+    function initStatsObserver() {
+      const statsSection = document.getElementById('stats');
+      if (!statsSection) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateStats();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.35 });
+
+      observer.observe(statsSection);
+    }
+
+    function initFaq() {
+      document.querySelectorAll('.faq-question').forEach((button) => {
+        button.addEventListener('click', () => {
+          const parent = button.closest('.faq-item');
+          const isOpen = parent.classList.contains('open');
+
+          document.querySelectorAll('.faq-item').forEach((item) => item.classList.remove('open'));
+          if (!isOpen) parent.classList.add('open');
+        });
+      });
+    }
+
     function handleSupportSubmit(e) {
       e.preventDefault();
       const type = document.getElementById('feedback-type').value;
@@ -921,6 +1247,12 @@
 
       window.location.href = `mailto:abhinavsanthoshpp@gmail.com?subject=${fullSubject}&body=${body}`;
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initDemoControls();
+      initStatsObserver();
+      initFaq();
+    });
   </script>
 
 </body>
