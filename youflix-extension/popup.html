@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouFlix Settings</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="logo-area">
+        <span class="logo-text">YOUFLIX</span>
+        <span class="badge-tag">PRO</span>
+      </div>
+      <div class="status-indicator" id="status-badge">
+        <span class="status-dot"></span>
+        <span class="status-text">Active</span>
+      </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <!-- Master Switch -->
+    <div class="master-switch-box">
+      <div class="switch-info">
+        <span class="switch-title">YouFlix Experience</span>
+        <span class="switch-desc">Toggle Netflix UI overhaul</span>
+      </div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="toggle-enabled" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- Settings List -->
+    <div class="settings-section">
+      <div class="section-label">EXPERIENCE CUSTOMIZATION</div>
+
+      <div class="setting-item">
+        <div class="setting-text">
+          <span class="item-title">Hero Billboard Trailer</span>
+          <span class="item-desc">Featured spotlight banner at the top</span>
+        </div>
+        <label class="toggle-switch small">
+          <input type="checkbox" id="toggle-hero" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-text">
+          <span class="item-title">Live Video Trailer</span>
+          <span class="item-desc">Stream video trailer in billboard</span>
+        </div>
+        <label class="toggle-switch small">
+          <input type="checkbox" id="toggle-trailer" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-text">
+          <span class="item-title">Card Hover Zoom</span>
+          <span class="item-desc">Preview flyout with action buttons</span>
+        </div>
+        <label class="toggle-switch small">
+          <input type="checkbox" id="toggle-hover" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-text">
+          <span class="item-title">Cinema Watch Mode</span>
+          <span class="item-desc">Theater background & Netflix red scrubber</span>
+        </div>
+        <label class="toggle-switch small">
+          <input type="checkbox" id="toggle-cinema" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-text">
+          <span class="item-title">Sound Effects (Ta-Dum)</span>
+          <span class="item-desc">Play iconic intro chime</span>
+        </div>
+        <label class="toggle-switch small">
+          <input type="checkbox" id="toggle-sound" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-text">
+          <span class="item-title">Auto-Next Countdown</span>
+          <span class="item-desc">Netflix-style post-play screen</span>
+        </div>
+        <label class="toggle-switch small">
+          <input type="checkbox" id="toggle-autonext" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Support & Donation -->
+    <div class="donate-box">
+      <div class="donate-info">
+        <span class="donate-title">☕ Support YouFlix</span>
+        <span class="donate-desc">Keep this extension free & updated</span>
+      </div>
+      <div class="donate-actions">
+        <button class="donate-chip" data-amount="3" title="Donate $3">$3</button>
+        <button class="donate-chip popular" data-amount="5" title="Donate $5 (Popular)">$5</button>
+        <button class="donate-chip" data-amount="10" title="Donate $10">$10</button>
+        <button class="btn-donate-link" id="btn-open-donate" title="All donation options">
+          Donate ❤️
+        </button>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions-box">
+      <button class="btn-primary" id="btn-open-youtube">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        Launch YouTube
+      </button>
+      <button class="btn-secondary" id="btn-test-chime" title="Preview Audio">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        Sound Test
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <span>v1.0.0</span>
+      <span class="dot-separator">•</span>
+      <a href="#" id="footer-donate-link" class="footer-link">Support Project ☕</a>
+      <span class="dot-separator">•</span>
+      <a href="https://www.youtube.com" target="_blank" class="footer-link">YouTube</a>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

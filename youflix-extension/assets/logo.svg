@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 90" width="400" height="90">
+  <defs>
+    <linearGradient id="netflixRed" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E50914" />
+      <stop offset="100%" stop-color="#B20710" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Main YOUFLIX Text with iconic Netflix arch and bold styling -->
+  <text x="20" y="65" font-family="'Helvetica Neue', Helvetica, Arial, 'Bebas Neue', sans-serif" font-size="62" font-weight="900" letter-spacing="4" fill="url(#netflixRed)">
+    YOUFLIX
+  </text>
+  <!-- Sub-label -->
+  <text x="280" y="45" font-family="'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2" fill="#E50914" opacity="0.9">
+    CINEMA
+  </text>
+</svg>

@@ -1,0 +1,1677 @@
+/* YouFlix theme */
+
+:root {
+  --yf-bg-dark: #141414;
+  --yf-bg-card: #181818;
+  --yf-bg-hover: #232323;
+  --yf-bg-elevated: #2f2f2f;
+  --yf-red: #E50914;
+  --yf-red-dark: #B81D24;
+  --yf-text-main: #FFFFFF;
+  --yf-text-muted: #A3A3A3;
+  --yf-text-dim: #777777;
+  --yf-green-match: #46D369;
+  --yf-font-sans: "Netflix Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --yf-transition-smooth: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  --yf-card-width: 285px;
+  --yf-card-radius: 4px;
+}
+
+/* Base Body & App Overrides in YouFlix Mode */
+body.youflix-mode {
+  background-color: var(--yf-bg-dark) !important;
+  color: var(--yf-text-main) !important;
+  font-family: var(--yf-font-sans) !important;
+  overflow-x: hidden !important;
+}
+
+body.youflix-mode #content,
+body.youflix-mode ytd-app,
+body.youflix-mode #page-manager {
+  background-color: var(--yf-bg-dark) !important;
+}
+
+/* Custom Netflix Scrollbar */
+body.youflix-mode::-webkit-scrollbar,
+.yf-slider-track::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+body.youflix-mode::-webkit-scrollbar-track,
+.yf-slider-track::-webkit-scrollbar-track {
+  background: var(--yf-bg-dark);
+}
+body.youflix-mode::-webkit-scrollbar-thumb,
+.yf-slider-track::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+body.youflix-mode::-webkit-scrollbar-thumb:hover,
+.yf-slider-track::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Conceal native feed offscreen (allows background YouTube pagination to run) */
+body.youflix-mode.youflix-home-active ytd-browse[page-subtype="home"] #primary,
+body.youflix-mode.youflix-home-active ytd-browse[page-subtype="home"] ytd-rich-grid-renderer {
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  top: 100vh !important;
+  pointer-events: none !important;
+}
+
+/* Conceal default masthead when YouFlix is active */
+body.youflix-mode ytd-masthead {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Native left sidebar hidden in YouFlix mode */
+body.youflix-mode tp-yt-app-drawer,
+body.youflix-mode #guide {
+  display: none !important;
+}
+
+/* Navigation bar */
+.yf-header-donate-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(229, 9, 20, 0.15);
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.yf-header-donate-btn:hover {
+  background: var(--yf-red);
+  border-color: var(--yf-red);
+  transform: scale(1.04);
+}
+
+#yf-header {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4%;
+  z-index: 99999;
+  background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0) 100%);
+  transition: background-color 0.4s ease;
+}
+
+body.youflix-mode #yf-header {
+  display: flex !important;
+}
+
+#yf-header.scrolled {
+  background-color: var(--yf-bg-dark) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+
+.yf-header-left {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.yf-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.yf-logo-text {
+  font-family: 'Helvetica Neue', 'Arial Black', 'Bebas Neue', sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--yf-red);
+  letter-spacing: 2.5px;
+  text-shadow: 0 2px 10px rgba(229, 9, 20, 0.4);
+  user-select: none;
+  transform: scaleY(1.05);
+}
+
+.yf-nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 22px;
+}
+
+.yf-nav-item a {
+  color: #E5E5E5;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  user-select: none;
+}
+
+.yf-nav-item a:hover {
+  color: #B3B3B3;
+}
+
+.yf-nav-item.active a {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+.yf-header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Expanding Netflix Search Bar */
+.yf-search-box {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 5px 8px;
+  transition: all 0.3s ease;
+}
+
+.yf-search-box.expanded {
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+
+.yf-search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #FFF;
+  font-size: 14px;
+  width: 0;
+  opacity: 0;
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+}
+
+.yf-search-box.expanded input {
+  width: 230px;
+  opacity: 1;
+  margin-left: 8px;
+}
+
+.yf-search-btn {
+  background: none;
+  border: none;
+  color: #FFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.yf-search-btn:hover {
+  transform: scale(1.1);
+}
+
+.yf-search-clear {
+  display: none;
+  background: none;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  padding: 2px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.yf-search-box.expanded.has-text .yf-search-clear {
+  display: block;
+}
+
+/* Header Switch Mode Toggle Badge */
+.yf-mode-switch-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFF;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--yf-transition-smooth);
+}
+
+.yf-mode-switch-btn:hover {
+  background: var(--yf-red);
+  border-color: var(--yf-red);
+  transform: scale(1.03);
+}
+
+/* Profile Avatar & Dropdown */
+.yf-profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.yf-avatar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.yf-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.yf-caret {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #fff;
+  transition: transform 0.2s ease;
+}
+
+.yf-profile-container:hover .yf-caret {
+  transform: rotate(180deg);
+}
+
+.yf-profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 14px;
+  width: 200px;
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 10px 0;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+  z-index: 10000;
+}
+
+.yf-profile-container:hover .yf-profile-dropdown {
+  display: flex;
+}
+
+.yf-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  color: #E5E5E5;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.yf-dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #FFF;
+}
+
+.yf-dropdown-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 6px 0;
+}
+
+/* Quick switcher */
+#yf-floating-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(229, 9, 20, 0.6);
+  color: #FFF;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.85);
+  user-select: none;
+  transition: all 0.25s ease;
+}
+
+#yf-floating-toggle:hover {
+  background: var(--yf-red);
+  border-color: var(--yf-red);
+  transform: scale(1.05);
+}
+
+#yf-floating-toggle.disabled {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(35, 35, 35, 0.95);
+  color: #BBB;
+}
+
+/* Billboard hero */
+
+#yf-billboard {
+  position: relative;
+  width: 100%;
+  height: 82vh;
+  min-height: 540px;
+  max-height: 850px;
+  background-color: var(--yf-bg-dark);
+  overflow: hidden;
+  user-select: none;
+}
+
+.yf-billboard-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center top;
+  filter: brightness(0.92);
+  transition: background-image 0.6s ease-in-out;
+}
+
+.yf-trailer-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.yf-trailer-embed {
+  width: 100%;
+  height: 140%;
+  transform: translateY(-14%);
+  border: none;
+  pointer-events: none;
+}
+
+/* Dual Vignette Layers for Real Netflix Readability */
+.yf-billboard-vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(77deg, rgba(0, 0, 0, 0.94) 0%, rgba(0, 0, 0, 0.5) 45%, rgba(0, 0, 0, 0) 80%),
+              linear-gradient(180deg, rgba(20, 20, 20, 0) 0%, rgba(20, 20, 20, 0.25) 45%, rgba(20, 20, 20, 0.8) 75%, #141414 100%);
+  pointer-events: none;
+}
+
+.yf-billboard-content {
+  position: absolute;
+  bottom: 22%;
+  left: 4%;
+  width: 42%;
+  min-width: 400px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.yf-spotlight-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--yf-red);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.yf-billboard-title {
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: #FFF;
+  margin: 0;
+  letter-spacing: -0.5px;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.85);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.yf-billboard-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.yf-match-percent {
+  color: var(--yf-green-match);
+  font-weight: 700;
+}
+
+.yf-pill-badge {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 1px 6px;
+  font-size: 11px;
+  border-radius: 3px;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.yf-billboard-desc {
+  font-size: 16px;
+  line-height: 1.45;
+  color: #E5E5E5;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.yf-billboard-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.yf-btn-play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #FFFFFF;
+  color: #000000;
+  border: none;
+  padding: 10px 26px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.yf-btn-play:hover {
+  background-color: rgba(255, 255, 255, 0.78);
+  transform: scale(1.02);
+}
+
+.yf-btn-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: rgba(109, 109, 110, 0.7);
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 26px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.yf-btn-info:hover {
+  background-color: rgba(109, 109, 110, 0.45);
+  transform: scale(1.02);
+}
+
+/* Netflix Right Edge Controls */
+.yf-billboard-right {
+  position: absolute;
+  right: 0;
+  bottom: 24%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 10;
+}
+
+.yf-btn-volume {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-right: 12px;
+}
+
+.yf-btn-volume:hover {
+  background: rgba(0, 0, 0, 0.9);
+  border-color: #FFF;
+  transform: scale(1.08);
+}
+
+.yf-billboard-maturity {
+  background-color: rgba(51, 51, 51, 0.6);
+  border: 3px solid #dcdcdc;
+  border-right: none;
+  padding: 4px 14px 4px 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+/* Browse rows */
+#yf-rows-container {
+  position: relative;
+  margin-top: -90px;
+  z-index: 20;
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.yf-row {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.yf-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4%;
+  margin-bottom: 8px;
+}
+
+.yf-row-title-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.yf-row-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #E5E5E5;
+  margin: 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.yf-row-title:hover {
+  color: #FFF;
+}
+
+.yf-row-explore {
+  font-size: 12px;
+  font-weight: 600;
+  color: #54b9c5;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.yf-row-header:hover .yf-row-explore {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Netflix Pagination Dashes */
+.yf-pagination-indicator {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.yf-row:hover .yf-pagination-indicator {
+  opacity: 1;
+}
+
+.yf-page-dot {
+  width: 12px;
+  height: 2px;
+  background-color: #4d4d4d;
+  transition: background-color 0.25s ease;
+}
+
+.yf-page-dot.active {
+  background-color: #aaa;
+}
+
+/* Slider Track with Ample Headroom to Prevent Hover Panel Clipping */
+.yf-slider-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.yf-slider-track {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding: 30px 4% 90px 4%;
+  margin-bottom: -55px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.yf-slider-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Navigation Chevrons */
+.yf-slider-arrow {
+  position: absolute;
+  top: 30px;
+  bottom: 90px;
+  width: 3.8%;
+  min-width: 44px;
+  background: rgba(20, 20, 20, 0.65);
+  color: #FFF;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.yf-slider-wrapper:hover .yf-slider-arrow {
+  opacity: 1;
+}
+
+.yf-slider-arrow:hover {
+  background: rgba(20, 20, 20, 0.95);
+}
+
+.yf-slider-arrow.left {
+  left: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.yf-slider-arrow.right {
+  right: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.yf-slider-arrow svg {
+  width: 28px;
+  height: 28px;
+  fill: #FFF;
+  transition: transform 0.2s ease;
+}
+
+.yf-slider-arrow:hover svg {
+  transform: scale(1.2);
+}
+
+/* Top 10 badges */
+.yf-row.top-10-row .yf-card {
+  display: flex;
+  align-items: center;
+}
+
+.yf-top10-rank {
+  font-family: 'Helvetica Neue', 'Arial Black', sans-serif;
+  font-size: 140px;
+  font-weight: 900;
+  line-height: 0.8;
+  color: #141414;
+  -webkit-text-stroke: 4px #595959;
+  letter-spacing: -8px;
+  user-select: none;
+  margin-right: -18px;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.yf-card:hover .yf-top10-rank {
+  transform: translateX(-8px);
+}
+
+/* Cards & hover state */
+.yf-card {
+  position: relative;
+  flex: 0 0 var(--yf-card-width);
+  height: 160px;
+  border-radius: var(--yf-card-radius);
+  background-color: var(--yf-bg-card);
+  cursor: pointer;
+  transform-origin: center center;
+  transition: transform 0.32s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.32s ease, z-index 0.32s ease;
+  user-select: none;
+}
+
+.yf-card.first-card {
+  transform-origin: left center !important;
+}
+
+.yf-card.last-card {
+  transform-origin: right center !important;
+}
+
+.yf-card-thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--yf-card-radius);
+  object-fit: cover;
+  background-color: #222;
+}
+
+.yf-card-duration {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #FFF;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+}
+
+/* Hover Expansion Card with 300ms Delay Protection */
+.yf-card:hover {
+  transform: scale(1.4) translateY(-10px);
+  z-index: 100;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.95);
+}
+
+.yf-card-hover-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #181818;
+  border-bottom-left-radius: var(--yf-card-radius);
+  border-bottom-right-radius: var(--yf-card-radius);
+  padding: 14px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.95);
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.yf-card:hover .yf-card-hover-panel {
+  display: flex;
+}
+
+.yf-card:hover .yf-card-thumb {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.yf-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.yf-actions-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.yf-round-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(42, 42, 42, 0.7);
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.yf-round-btn:hover {
+  border-color: #FFF;
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.yf-round-btn.play {
+  background: #FFF;
+  color: #000;
+  border: none;
+}
+
+.yf-round-btn.play:hover {
+  background: #E5E5E5;
+}
+
+.yf-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFF;
+  margin: 0;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.yf-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--yf-text-muted);
+}
+
+.yf-genre-bullets {
+  font-size: 11px;
+  color: #E5E5E5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.yf-card-channel {
+  font-size: 11px;
+  color: var(--yf-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Detail modal */
+
+.yf-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 100000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+  animation: yfFadeIn 0.3s ease;
+}
+
+@keyframes yfFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.yf-modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 880px;
+  background: #181818;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
+  animation: yfSlideUp 0.35s cubic-bezier(0.2, 1, 0.5, 1);
+  margin-bottom: 40px;
+}
+
+@keyframes yfSlideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.yf-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #181818;
+  color: #FFF;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s ease;
+}
+
+.yf-modal-close:hover {
+  background: #282828;
+  border-color: #FFF;
+  transform: scale(1.1);
+}
+
+.yf-modal-hero {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  background-size: cover;
+  background-position: center;
+}
+
+.yf-modal-hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(180deg, transparent 0%, #181818 100%);
+}
+
+.yf-modal-hero-content {
+  position: absolute;
+  bottom: 28px;
+  left: 36px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.yf-modal-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #FFF;
+  margin: 0;
+  max-width: 620px;
+}
+
+.yf-modal-body {
+  padding: 24px 36px 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.yf-modal-top-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+}
+
+.yf-modal-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #D2D2D2;
+  white-space: pre-line;
+}
+
+.yf-modal-side-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--yf-text-muted);
+}
+
+.yf-modal-side-meta strong {
+  color: #FFF;
+}
+
+/* Netflix "More Like This" 3x3 Grid */
+.yf-more-like-section h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #FFF;
+  margin-bottom: 18px;
+}
+
+.yf-more-like-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.yf-mlt-card {
+  background: #242424;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.yf-mlt-card:hover {
+  transform: translateY(-4px);
+  background: #2c2c2c;
+}
+
+.yf-mlt-thumb-wrap {
+  position: relative;
+  width: 100%;
+  height: 140px;
+}
+
+.yf-mlt-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.yf-mlt-duration {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #FFF;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.yf-mlt-content {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.yf-mlt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.yf-mlt-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFF;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.yf-modal-donate-bar {
+  margin-top: 24px;
+  padding: 14px 18px;
+  background: rgba(229, 9, 20, 0.08);
+  border: 1px solid rgba(229, 9, 20, 0.25);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #ddd;
+}
+
+.yf-modal-donate-link {
+  background: var(--yf-red);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 12px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.yf-modal-donate-link:hover {
+  background: #f40612;
+  transform: translateY(-1px);
+}
+
+/* Watch page & player */
+
+/* In watch mode, hide the browse header and floating pill to prevent obstruction */
+body.youflix-mode.youflix-watch-active #yf-header {
+  display: none !important;
+}
+
+body.youflix-mode.youflix-watch-active #yf-floating-toggle {
+  display: none !important;
+}
+
+/* Netflix Auto-Hiding Cinema Bar */
+#yf-watch-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 60%, transparent 100%);
+  z-index: 999999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.2, 0, 0, 1);
+}
+
+#yf-watch-bar.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.yf-watch-bar-left {
+  display: flex;
+  align-items: center;
+}
+
+.yf-btn-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.yf-btn-back:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(-3px);
+}
+
+.yf-watch-bar-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  max-width: 60%;
+  text-align: center;
+}
+
+.yf-watch-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.yf-watch-channel {
+  font-size: 12px;
+  color: var(--yf-text-muted);
+  font-weight: 500;
+}
+
+.yf-watch-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.yf-pill-badge.maturity {
+  background: rgba(0, 0, 0, 0.65);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #FFFFFF;
+  font-weight: 800;
+}
+
+/* Fullscreen Mode: Hide browse header and floating switcher (preserve cinema watch bar) */
+body:fullscreen #yf-header,
+body:fullscreen #yf-floating-toggle,
+:fullscreen #yf-header,
+:fullscreen #yf-floating-toggle {
+  display: none !important;
+}
+
+/* Cinema Floor & Theater Sizing */
+body.youflix-mode.youflix-watch-active {
+  background: #000000 !important;
+}
+
+body.youflix-mode.youflix-watch-active ytd-watch-flexy,
+body.youflix-mode.youflix-watch-active ytd-watch-grid {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  background: #000000 !important;
+}
+
+body.youflix-mode.youflix-watch-active #player-full-bleed-container,
+body.youflix-mode.youflix-watch-active #player-container-outer {
+  margin-top: 0 !important;
+}
+
+/* Centered Cinema Content Area */
+body.youflix-mode.youflix-watch-active #columns {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 24px !important;
+  background: transparent !important;
+}
+
+body.youflix-mode.youflix-watch-active #primary {
+  background: transparent !important;
+}
+
+body.youflix-mode.youflix-watch-active ytd-watch-metadata {
+  color: #FFFFFF !important;
+  background: transparent !important;
+}
+
+body.youflix-mode.youflix-watch-active #title h1 yt-formatted-string {
+  color: #FFFFFF !important;
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+}
+
+body.youflix-mode.youflix-watch-active #description.ytd-watch-metadata {
+  background: #181818 !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #D2D2D2 !important;
+  padding: 16px !important;
+}
+
+body.youflix-mode.youflix-watch-active #comments {
+  background: transparent !important;
+  color: #FFFFFF !important;
+}
+
+/* Netflix Red Subscribe Button */
+body.youflix-mode #subscribe-button button,
+body.youflix-mode yt-subscribe-button-shape button,
+body.youflix-mode ytd-subscribe-button-renderer button {
+  background-color: var(--yf-red) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  border-radius: 4px !important;
+}
+
+body.youflix-mode #subscribe-button button:hover,
+body.youflix-mode yt-subscribe-button-shape button:hover,
+body.youflix-mode ytd-subscribe-button-renderer button:hover {
+  background-color: var(--yf-red-dark) !important;
+}
+
+/* Netflix Inactivity Mouse Idle Cursor Hiding */
+body.youflix-mode.youflix-watch-active.mouse-idle,
+body.youflix-mode.youflix-watch-active.mouse-idle * {
+  cursor: none !important;
+}
+
+body.youflix-mode.youflix-watch-active.mouse-idle #yf-watch-bar,
+body.youflix-mode.youflix-watch-active.mouse-idle #yf-skip-intro-btn,
+body.youflix-mode.youflix-watch-active.mouse-idle .ytp-chrome-bottom,
+body.youflix-mode.youflix-watch-active.mouse-idle .ytp-chrome-top {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.45s ease !important;
+}
+
+/* Netflix "Skip Intro" Button */
+#yf-skip-intro-btn {
+  position: absolute;
+  bottom: 85px;
+  right: 32px;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.85);
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+#yf-skip-intro-btn:hover {
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #FFFFFF;
+  transform: scale(1.04);
+}
+
+#yf-skip-intro-btn.idle-hide {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Center Play/Pause & Seek Pulse Animation */
+.yf-player-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.75);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 99999;
+  animation: yfPulseFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.85);
+}
+
+.yf-seek-pulse {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  gap: 2px;
+}
+
+@keyframes yfPulseFade {
+  0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
+  35% { transform: translate(-50%, -50%) scale(1.12); opacity: 1; }
+  75% { transform: translate(-50%, -50%) scale(1.0); opacity: 0.85; }
+  100% { transform: translate(-50%, -50%) scale(1.25); opacity: 0; }
+}
+
+/* Replace native YouTube top chrome and bezels */
+body.youflix-mode.youflix-watch-active .ytp-chrome-top,
+body.youflix-mode.youflix-watch-active .ytp-gradient-top,
+body.youflix-mode .ytp-bezel,
+body.youflix-mode .ytp-bezel-text-wrapper {
+  display: none !important;
+}
+
+/* Netflix Red YouTube Player Scrubber & Buffer Bar */
+body.youflix-mode .ytp-gradient-bottom {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.5) 60%, transparent 100%) !important;
+  height: 120px !important;
+}
+
+body.youflix-mode .ytp-progress-bar-container {
+  height: 14px !important;
+}
+
+body.youflix-mode .ytp-progress-bar {
+  height: 4px !important;
+  transition: height 0.15s ease !important;
+}
+
+body.youflix-mode .ytp-progress-bar-container:hover .ytp-progress-bar {
+  height: 7px !important;
+}
+
+body.youflix-mode .ytp-play-progress,
+body.youflix-mode .ytp-swatch-background-color {
+  background-color: var(--yf-red) !important;
+  background-image: none !important;
+}
+
+body.youflix-mode .ytp-load-progress {
+  background: rgba(255, 255, 255, 0.35) !important;
+}
+
+body.youflix-mode .ytp-hover-progress {
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+body.youflix-mode .ytp-scrubber-button {
+  background-color: var(--yf-red) !important;
+  border: 2px solid #FFFFFF !important;
+  box-shadow: 0 0 8px rgba(229, 9, 20, 0.8) !important;
+  transform: scale(1) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+body.youflix-mode .ytp-scrubber-button:hover,
+body.youflix-mode .ytp-progress-bar-container:hover .ytp-scrubber-button {
+  transform: scale(1.3) !important;
+  box-shadow: 0 0 14px rgba(229, 9, 20, 1), 0 0 6px rgba(255, 255, 255, 0.8) !important;
+}
+
+body.youflix-mode .ytp-time-display {
+  font-family: var(--yf-font) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #FFFFFF !important;
+  letter-spacing: 0.4px !important;
+}
+
+body.youflix-mode .ytp-volume-slider-handle:before {
+  background: var(--yf-red) !important;
+}
+
+body.youflix-mode .ytp-volume-slider-handle {
+  background: #FFFFFF !important;
+}
+
+/* Netflix "More Like This" Sidebar Styling on Watch Page */
+body.youflix-mode.youflix-watch-active #secondary {
+  padding-top: 16px !important;
+}
+
+body.youflix-mode.youflix-watch-active #secondary-inner {
+  background: transparent !important;
+}
+
+body.youflix-mode.youflix-watch-active ytd-compact-video-renderer {
+  background: #181818 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 6px !important;
+  padding: 8px !important;
+  margin-bottom: 10px !important;
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), border-color 0.25s ease, box-shadow 0.25s ease !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.youflix-mode.youflix-watch-active ytd-compact-video-renderer:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: #222222 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), 0 0 10px rgba(229, 9, 20, 0.2) !important;
+}
+
+body.youflix-mode.youflix-watch-active ytd-compact-video-renderer #video-title {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+}
+
+body.youflix-mode.youflix-watch-active ytd-compact-video-renderer ytd-channel-name,
+body.youflix-mode.youflix-watch-active ytd-compact-video-renderer #metadata-line span {
+  color: var(--yf-text-muted) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+}
+
+body.youflix-mode.youflix-watch-active ytd-compact-video-renderer ytd-thumbnail {
+  border-radius: 4px !important;
+  overflow: hidden !important;
+}
+
+/* Hide YouTube ads and clutter in secondary column */
+body.youflix-mode.youflix-watch-active ytd-ad-slot-renderer,
+body.youflix-mode.youflix-watch-active ytd-promoted-sparkles-web-renderer,
+body.youflix-mode.youflix-watch-active #offer-module,
+body.youflix-mode.youflix-watch-active ytd-banner-promo-renderer-background {
+  display: none !important;
+}
+
+/* Action Buttons (Like, Share, Download) */
+body.youflix-mode.youflix-watch-active #actions-inner button,
+body.youflix-mode.youflix-watch-active ytd-menu-renderer yt-button-shape button {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 4px !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  transition: background 0.2s ease, transform 0.2s ease !important;
+}
+
+body.youflix-mode.youflix-watch-active #actions-inner button:hover,
+body.youflix-mode.youflix-watch-active ytd-menu-renderer yt-button-shape button:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+  transform: scale(1.04) !important;
+}
+
+/* Settings Menu / Context Popups in Netflix Styling */
+body.youflix-mode .ytp-popup {
+  background: rgba(20, 20, 20, 0.96) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 6px !important;
+}
+
+body.youflix-mode .ytp-menuitem[aria-checked="true"] .ytp-menuitem-toggle-checkbox {
+  background: var(--yf-red) !important;
+}
+
+/* Post-play / Next Video Netflix Card */
+#yf-postplay-banner {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 380px;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: yfSlideUp 0.3s ease;
+}
+
+.yf-postplay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--yf-text-muted);
+}
+
+.yf-postplay-content {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.yf-postplay-thumb {
+  width: 110px;
+  height: 62px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.yf-postplay-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.yf-postplay-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFF;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.yf-postplay-timer {
+  color: var(--yf-red);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.yf-postplay-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.yf-btn-postplay {
+  flex: 1;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+.yf-btn-postplay.primary {
+  background: #FFF;
+  color: #000;
+}
+
+.yf-btn-postplay.secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFF;
+}

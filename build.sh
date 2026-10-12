@@ -24,6 +24,7 @@ REQUIRED_FILES=(
   "popup.js"
   "popup.css"
   "donate.html"
+  "donate.js"
   "assets/icon16.png"
   "assets/icon32.png"
   "assets/icon48.png"
@@ -53,6 +54,7 @@ zip -q -r "$OUTPUT_ZIP" \
   popup.js \
   popup.css \
   donate.html \
+  donate.js \
   assets/ \
   -x "assets/promo/*" \
   -x "*.DS_Store" \

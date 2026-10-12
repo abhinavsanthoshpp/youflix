@@ -504,7 +504,7 @@
               <span class="upi-label">UPI ID:</span>
               <span class="upi-id-text" id="upi-id-val">abhinava6525@naviaxis</span>
               <div class="upi-actions">
-                <button class="btn-copy" onclick="copyText('upi-id-val', this)">Copy</button>
+                <button class="btn-copy" id="btn-copy-upi">Copy</button>
                 <button class="btn-qr-toggle" id="btn-toggle-qr" type="button">Scan QR</button>
               </div>
             </div>
@@ -564,119 +564,6 @@
     </a>
   </div>
 
-  <script>
-    // -------------------------------------------------------------
-    // CONFIGURE YOUR PAYMENT HANDLES HERE
-    // Simply replace the placeholders with your username or links:
-    // -------------------------------------------------------------
-    const DONATION_CONFIG = {
-      // Your UPI ID for direct 0% fee bank deposits (GPay, PhonePe, Paytm, BHIM, Navi)
-      upiId: 'abhinava6525@naviaxis',
-
-      // Your Buy Me A Coffee username (buymeacoffee.com/your_username)
-      buyMeACoffeeUsername: 'abhinavsanthoshpp',
-
-      // Your Ko-fi username (ko-fi.com/your_username)
-      kofiUsername: 'abhinav',
-
-      // Your GitHub username for sponsors (github.com/sponsors/your_username)
-      githubUsername: 'abhinavsanthoshpp'
-    };
-
-    let selectedAmount = 5;
-
-    // Read amount from URL query param if available (e.g. donate.html?amount=10)
-    const urlParams = new URLSearchParams(window.location.search);
-    const paramAmount = parseInt(urlParams.get('amount'), 10);
-    if (paramAmount && !isNaN(paramAmount)) {
-      selectedAmount = paramAmount;
-    }
-
-    const amountButtons = document.querySelectorAll('.amount-btn');
-    const customInput = document.getElementById('custom-amount');
-
-    function syncAmountUI() {
-      amountButtons.forEach(btn => {
-        const val = parseInt(btn.dataset.amount, 10);
-        if (val === selectedAmount && !customInput.value) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-      updatePaymentLinks();
-    }
-
-    amountButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        selectedAmount = parseInt(btn.dataset.amount, 10);
-        customInput.value = '';
-        syncAmountUI();
-      });
-    });
-
-    customInput.addEventListener('input', () => {
-      const val = parseInt(customInput.value, 10);
-      if (val && val > 0) {
-        selectedAmount = val;
-        amountButtons.forEach(b => b.classList.remove('active'));
-      } else {
-        selectedAmount = 5;
-      }
-      updatePaymentLinks();
-    });
-
-    function updatePaymentLinks() {
-      const bmacLink = document.getElementById('link-bmac');
-      const kofiLink = document.getElementById('link-kofi');
-      const githubLink = document.getElementById('link-github');
-
-      // Buy Me A Coffee (supports amount)
-      bmacLink.href = `https://buymeacoffee.com/${DONATION_CONFIG.buyMeACoffeeUsername}`;
-
-      // Ko-fi
-      kofiLink.href = `https://ko-fi.com/${DONATION_CONFIG.kofiUsername}`;
-
-      // GitHub Sponsors
-      githubLink.href = `https://github.com/sponsors/${DONATION_CONFIG.githubUsername}`;
-    }
-
-    // Toggle UPI QR Code
-    const qrToggleBtn = document.getElementById('btn-toggle-qr');
-    const qrWrapper = document.getElementById('upi-qr-wrapper');
-    if (qrToggleBtn && qrWrapper) {
-      qrToggleBtn.addEventListener('click', () => {
-        const isShown = qrWrapper.classList.toggle('show');
-        qrToggleBtn.textContent = isShown ? 'Hide QR' : 'Scan QR';
-      });
-    }
-
-    // Copy to clipboard helper
-    function copyText(id, btn) {
-      const text = document.getElementById(id).textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        const original = btn.textContent;
-        btn.textContent = 'Copied!';
-        btn.style.background = '#46D369';
-        setTimeout(() => {
-          btn.textContent = original;
-          btn.style.background = '';
-        }, 1800);
-      }).catch(() => {});
-    }
-
-    // Set addresses from config
-    const upiEl = document.getElementById('upi-id-val');
-    if (upiEl) upiEl.textContent = DONATION_CONFIG.upiId;
-
-    const upiQrImg = document.getElementById('upi-qr-image');
-    if (upiQrImg) {
-      const upiUri = `upi://pay?pa=${encodeURIComponent(DONATION_CONFIG.upiId)}&pn=Abhinav&cu=INR`;
-      upiQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUri)}`;
-    }
-
-    // Initialize
-    syncAmountUI();
-  </script>
+  <script src="donate.js"></script>
 </body>
 </html>

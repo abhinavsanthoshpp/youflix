@@ -8,7 +8,12 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "youflix@abhinavsanthoshpp.github.io",
-      "strict_min_version": "109.0"
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
     }
   },
   "permissions": [
@@ -51,7 +56,8 @@
     {
       "resources": [
         "assets/*",
-        "donate.html"
+        "donate.html",
+        "donate.js"
       ],
       "matches": [
         "*://*.youtube.com/*"
